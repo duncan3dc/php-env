@@ -1,0 +1,28 @@
+{
+    "name": "duncan3dc/php-env",
+    "type": "library",
+    "description": "A small library to get environment details",
+    "keywords": ["env", ".env", "dotenv"],
+    "homepage": "https://github.com/duncan3dc/php-env",
+    "license": "Apache-2.0",
+    "authors": [{
+        "name": "Craig Duncan",
+        "email": "git@duncanc.co.uk",
+        "homepage": "https://github.com/duncan3dc",
+        "role": "Developer"
+    }],
+    "require": {
+        "php": "^5.6|^7.0",
+        "duncan3dc/serial": "^1.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^0.9.5",
+        "phpunit/phpunit": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "duncan3dc\\Env\\": "src/",
+            "duncan3dc\\EnvTests\\": "tests/"
+        }
+    }
+}
