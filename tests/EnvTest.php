@@ -9,6 +9,13 @@ class EnvTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        # Clear the cached values from previous tests
+        $class = new \ReflectionClass(Env::class);
+        foreach ($class->getProperties() as $property) {
+            $property->setAccessible(true);
+            $property->setValue(null);
+        }
+
         Env::usePath(__DIR__);
     }
 
@@ -74,6 +81,19 @@ class EnvTest extends \PHPUnit_Framework_TestCase
         $this->assertSame("/tmp/directory", Env::path("directory", "/tmp"));
     }
 
+    public function testRealpath1()
+    {
+        $this->assertSame(__DIR__, Env::realpath(""));
+    }
+    public function testRealpath2()
+    {
+        $this->assertSame(__DIR__, Env::realpath("."));
+    }
+    public function testRealpath3()
+    {
+        $this->assertSame(realpath(__DIR__ . "/.."), Env::realpath(".."));
+    }
+
     public function testGetVar1()
     {
         $this->assertSame("OK", Env::getVar("test-string"));
@@ -105,5 +125,61 @@ class EnvTest extends \PHPUnit_Framework_TestCase
     {
         Env::setVar("test-new-var", "ok");
         $this->assertSame("ok", Env::getVar("test-new-var"));
+    }
+
+
+    public function testGetHostNameApache()
+    {
+        $_SERVER["HTTP_HOST"] = "example.com";
+        $this->assertSame("example.com", Env::getHostName());
+    }
+    public function testGetHostNameDefault()
+    {
+        unset($_SERVER["HTTP_HOST"]);
+        $this->assertSame(php_uname("n"), Env::getHostName());
+    }
+
+
+    public function testGetMachineName()
+    {
+        $this->assertSame(php_uname("n"), Env::getMachineName());
+    }
+
+
+    private function setRevision()
+    {
+        Env::usePath(__DIR__ . "/data");
+        $path = Env::path(".git");
+        if (!is_dir($path)) {
+            mkdir($path);
+        }
+        file_put_contents("{$path}/HEAD", "ref: master");
+        file_put_contents("{$path}/master", "abcdefghijk");
+    }
+    public function testRevision1()
+    {
+        $this->setRevision();
+        $this->assertSame("abcdefghij", Env::getRevision());
+    }
+    public function testRevision2()
+    {
+        $this->setRevision();
+        $this->assertSame("abcdefghijk", Env::getRevision(0));
+    }
+    public function testRevision3()
+    {
+        $this->setRevision();
+        $this->assertSame("abcde", Env::getRevision(5));
+    }
+
+    public function testUserAgent()
+    {
+        $_SERVER["USER_AGENT"] = "special-browser";
+        $this->assertSame("special-browser", Env::getUserAgent());
+    }
+    public function testUserAgentFail()
+    {
+        unset($_SERVER["USER_AGENT"]);
+        $this->assertSame("", Env::getUserAgent());
     }
 }

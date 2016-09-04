@@ -30,6 +30,22 @@ class Env
     private static $environment;
 
     /**
+     * @var string $hostname The name of the current domain running.
+     */
+    private static $hostname;
+
+    /**
+     * @var string $machine The name of the current server running.
+     */
+    private static $machine;
+
+    /**
+     * @var string $machine The current git version of the codebase running.
+     */
+    private static $revision;
+
+
+    /**
      * Set the root path to use in the path methods.
      *
      * @param int|string $argument Either one of the PATH class constants or an actual path to a directory that exists, and is readable
@@ -198,5 +214,108 @@ class Env
     public static function setVar($var, $value)
     {
         static::getEnvironment()->set($var, $value);
+    }
+
+
+    /**
+     * Get an absolute path for the specified relative path, convert symlinks to a canonical path, and check the path exists.
+     * This method is very similar to path() except the result is then run through php's standard realpath() function.
+     *
+     * @param string $append The relative path to append to the root path
+     *
+     * @return string
+     */
+    public static function realpath($append)
+    {
+        $path = static::path($append);
+        return realpath($path);
+    }
+
+
+    /**
+     * Get the current hostname from apache if this is mod_php otherwise the server's hostname.
+     *
+     * @return string
+     */
+    public static function getHostName()
+    {
+        if (static::$hostname === null) {
+            # If the hostname is in the server array (usually set by apache) then use that
+            if (!empty($_SERVER["HTTP_HOST"])) {
+                static::$hostname = $_SERVER["HTTP_HOST"];
+
+            # Otherwise use the hostname of this machine
+            } else {
+                static::$hostname = static::getMachineName();
+            }
+        }
+
+        return static::$hostname;
+    }
+
+
+    /**
+     * Get the current hostname of the machine.
+     *
+     * @return string
+     */
+    public static function getMachineName()
+    {
+        if (static::$machine === null) {
+            static::$machine = php_uname("n");
+        }
+
+        return static::$machine;
+    }
+
+
+    /**
+     * Get the revision number from the local git clone data.
+     *
+     * @param int $length The length of the revision hash to return
+     *
+     * @return string|void
+     */
+    public static function getRevision($length = 10)
+    {
+        if (static::$revision === null) {
+            $revision = "";
+
+            $path = static::path(".git");
+            if (is_dir($path)) {
+                $head = "{$path}/HEAD";
+                if (file_exists($head)) {
+                    $data = file_get_contents($head);
+                    if (preg_match("/ref: ([^\s]+)\b/", $data, $matches)) {
+                        $ref = $path . "/" . $matches[1];
+                        if (file_exists($ref)) {
+                            $revision = trim(file_get_contents($ref));
+                        }
+                    }
+                }
+            }
+
+            static::$revision = $revision;
+        }
+
+        if ($length > 0 && strlen(static::$revision) > $length) {
+            return substr(static::$revision, 0, $length);
+        } else {
+            return static::$revision;
+        }
+    }
+
+
+    /**
+     * Get the current useragent.
+     *
+     * @return string
+     */
+    public static function getUserAgent()
+    {
+        if (empty($_SERVER["USER_AGENT"])) {
+            return "";
+        }
+        return $_SERVER["USER_AGENT"];
     }
 }
