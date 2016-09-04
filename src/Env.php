@@ -94,12 +94,21 @@ class Env
      * Get an absolute path for the specified relative path (relative to the currently used internal root path).
      *
      * @param string $apend The relative path to append to the root path
+     * @param int|string $use Either one of the PATH class constants or an actual path to a directory that exists, and is readable
      *
      * @return string
      */
-    public static function path($append)
+    public static function path($append, $use = null)
     {
         $path = static::getPath();
+
+        # If a different use has been requested then use it for this call only
+        if ($use) {
+            $previous = $path;
+            static::usePath($use);
+            $path = static::getPath();
+            static::usePath($previous);
+        }
 
         if (substr($append, 0, 1) != "/") {
             $path .= "/";

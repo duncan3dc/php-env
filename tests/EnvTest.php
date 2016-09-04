@@ -69,6 +69,11 @@ class EnvTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(__DIR__ . "/test", Env::path("/test"));
     }
 
+    public function testPathWithUse()
+    {
+        $this->assertSame("/tmp/directory", Env::path("directory", "/tmp"));
+    }
+
     public function testGetVar1()
     {
         $this->assertSame("OK", Env::getVar("test-string"));
