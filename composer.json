@@ -16,8 +16,8 @@
         "duncan3dc/serial": "^1.0"
     },
     "require-dev": {
-        "mockery/mockery": "^0.9.5",
-        "phpunit/phpunit": "^5.5"
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^5.7"
     },
     "autoload": {
         "psr-4": {"duncan3dc\\Env\\": "src/"}
