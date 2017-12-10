@@ -1,9 +1,9 @@
 # php-env
 A small PHP library to get environment details
 
-[![Build Status](https://img.shields.io/travis/duncan3dc/php-env.svg)](https://travis-ci.org/duncan3dc/php-env)
-[![Latest Version](https://img.shields.io/packagist/v/duncan3dc/php-env.svg)](https://packagist.org/packages/duncan3dc/php-env)
-
+[![Latest Stable Version](https://poser.pugx.org/duncan3dc/php-env/version.svg)](https://packagist.org/packages/duncan3dc/php-env)
+[![Build Status](https://travis-ci.org/duncan3dc/php-env.svg?branch=master)](https://travis-ci.org/duncan3dc/php-env)
+[![Coverage Status](https://coveralls.io/repos/github/duncan3dc/php-env/badge.svg)](https://coveralls.io/github/duncan3dc/php-env)
 
 _Read more at http://duncan3dc.github.io/php-env/_  
 
