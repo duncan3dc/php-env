@@ -2,7 +2,9 @@
 
 namespace duncan3dc\EnvTests;
 
-class AbstractEnvironmentTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class AbstractEnvironmentTest extends TestCase
 {
     private $env;
 

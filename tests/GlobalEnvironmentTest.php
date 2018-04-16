@@ -3,8 +3,9 @@
 namespace duncan3dc\EnvTests;
 
 use duncan3dc\Env\GlobalEnvironment;
+use PHPUnit\Framework\TestCase;
 
-class GlobalEnvironmentTest extends \PHPUnit_Framework_TestCase
+class GlobalEnvironmentTest extends TestCase
 {
     private $env;
 

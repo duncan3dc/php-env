@@ -3,8 +3,9 @@
 namespace duncan3dc\EnvTests;
 
 use duncan3dc\Env\YamlEnvironment;
+use PHPUnit\Framework\TestCase;
 
-class YamlEnvironmentTest extends \PHPUnit_Framework_TestCase
+class YamlEnvironmentTest extends TestCase
 {
     private $env;
 

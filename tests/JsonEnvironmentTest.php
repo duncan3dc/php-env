@@ -3,8 +3,9 @@
 namespace duncan3dc\EnvTests;
 
 use duncan3dc\Env\JsonEnvironment;
+use PHPUnit\Framework\TestCase;
 
-class JsonEnvironmentTest extends \PHPUnit_Framework_TestCase
+class JsonEnvironmentTest extends TestCase
 {
     private $env;
 

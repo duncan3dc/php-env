@@ -4,8 +4,9 @@ namespace duncan3dc\EnvTests;
 
 use duncan3dc\Env\Env;
 use duncan3dc\Env\Exception;
+use PHPUnit\Framework\TestCase;
 
-class EnvTest extends \PHPUnit_Framework_TestCase
+class EnvTest extends TestCase
 {
     public function setUp()
     {
@@ -32,14 +33,16 @@ class EnvTest extends \PHPUnit_Framework_TestCase
     {
         unset($_SERVER["PHP_SELF"]);
 
-        $this->setExpectedException(Exception::class, "PHP_SELF not defined");
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("PHP_SELF not defined");
         Env::usePath(Env::PATH_PHP_SELF);
     }
 
 
     public function testUseInvalidDirectory()
     {
-        $this->setExpectedException(Exception::class, "Invalid path specified: /does-not-exist");
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("Invalid path specified: /does-not-exist");
         Env::usePath("/does-not-exist");
     }
 
@@ -47,7 +50,8 @@ class EnvTest extends \PHPUnit_Framework_TestCase
     public function testDocumentRoot1()
     {
         unset($_SERVER["DOCUMENT_ROOT"]);
-        $this->setExpectedException(Exception::class, "DOCUMENT_ROOT not defined");
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("DOCUMENT_ROOT not defined");
         Env::usePath(Env::PATH_DOCUMENT_ROOT);
     }
 
@@ -117,7 +121,8 @@ class EnvTest extends \PHPUnit_Framework_TestCase
     }
     public function testRequireVar2()
     {
-        $this->setExpectedException(Exception::class, "Failed to get the environment variable: does-not-exist");
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("Failed to get the environment variable: does-not-exist");
         Env::requireVar("does-not-exist");
     }
 
