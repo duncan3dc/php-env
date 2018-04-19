@@ -1,17 +1,18 @@
 <?php
 
-namespace duncan3dc\EnvTests;
+namespace duncan3dc\EnvTests\Variables;
 
 use duncan3dc\Env\JsonEnvironment;
+use duncan3dc\Env\Variables\JsonProvider;
 use PHPUnit\Framework\TestCase;
 
-class JsonEnvironmentTest extends TestCase
+class JsonProviderTest extends TestCase
 {
     private $env;
 
     public function setUp()
     {
-        $this->env = new JsonEnvironment(__DIR__ . "/data/env.json");
+        $this->env = new JsonProvider(__DIR__ . "/../data/env.json");
     }
 
 

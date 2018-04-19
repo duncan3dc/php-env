@@ -1,10 +1,9 @@
 <?php
 
-namespace duncan3dc\Env;
+namespace duncan3dc\Env\Variables;
 
-class GlobalEnvironment extends AbstractEnvironment
+class GlobalProvider extends AbstractProvider
 {
-
     /**
      * Get all defined environment variables.
      *

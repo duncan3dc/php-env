@@ -1,10 +1,10 @@
 <?php
 
-namespace duncan3dc\Env;
+namespace duncan3dc\Env\Variables;
 
 use duncan3dc\Serial\Json;
 
-class JsonEnvironment extends AbstractEnvironment
+class JsonProvider extends AbstractProvider
 {
     /**
      * @var string $path The path to the file.

@@ -1,17 +1,18 @@
 <?php
 
-namespace duncan3dc\EnvTests;
+namespace duncan3dc\EnvTests\Variables;
 
+use duncan3dc\Env\Variables\YamlProvider;
 use duncan3dc\Env\YamlEnvironment;
 use PHPUnit\Framework\TestCase;
 
-class YamlEnvironmentTest extends TestCase
+class YamlProviderTest extends TestCase
 {
     private $env;
 
     public function setUp()
     {
-        $this->env = new YamlEnvironment(__DIR__ . "/data/env.yaml");
+        $this->env = new YamlProvider(__DIR__ . "/../data/env.yaml");
     }
 
 

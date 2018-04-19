@@ -1,10 +1,10 @@
 <?php
 
-namespace duncan3dc\Env;
+namespace duncan3dc\Env\Variables;
 
 use duncan3dc\Serial\Yaml;
 
-class YamlEnvironment extends AbstractEnvironment
+class YamlProvider extends AbstractProvider
 {
     /**
      * @var string $path The path to the file.

@@ -1,16 +1,17 @@
 <?php
 
-namespace duncan3dc\EnvTests;
+namespace duncan3dc\EnvTests\Variables;
 
+use duncan3dc\EnvTests\Variables\ExceptionProvider;
 use PHPUnit\Framework\TestCase;
 
-class AbstractEnvironmentTest extends TestCase
+class AbstractProviderTest extends TestCase
 {
     private $env;
 
     public function setUp()
     {
-        $this->env = new ExceptionEnvironment;
+        $this->env = new ExceptionProvider;
     }
 
 

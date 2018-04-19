@@ -1,11 +1,12 @@
 <?php
 
-namespace duncan3dc\EnvTests;
+namespace duncan3dc\EnvTests\Variables;
 
 use duncan3dc\Env\GlobalEnvironment;
+use duncan3dc\Env\Variables\GlobalProvider;
 use PHPUnit\Framework\TestCase;
 
-class GlobalEnvironmentTest extends TestCase
+class GlobalProviderTest extends TestCase
 {
     private $env;
 
@@ -15,7 +16,7 @@ class GlobalEnvironmentTest extends TestCase
         $_ENV["test-int"] = 7;
         $_ENV["test-bool"] = true;
         $_ENV["test-exists"] = null;
-        $this->env = new GlobalEnvironment;
+        $this->env = new GlobalProvider;
     }
 
 

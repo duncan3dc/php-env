@@ -2,6 +2,9 @@
 
 namespace duncan3dc\Env;
 
+use duncan3dc\Env\Variables\ProviderInterface;
+use duncan3dc\Env\Variables\YamlProvider;
+
 class Env
 {
     /**
@@ -25,7 +28,7 @@ class Env
     private static $path;
 
     /**
-     * @var EnvironmentInterface $environment The underlying environment instance in use.
+     * @var ProviderInterface $environment The underlying environment instance in use.
      */
     private static $environment;
 
@@ -139,11 +142,11 @@ class Env
     /**
      * Set the instance to use for environment variables/
      *
-     * @param EnvironmentInterface $environment The instance to use.
+     * @param ProviderInterface $environment The instance to use.
      *
      * @return void
      */
-    public static function setEnvironment(EnvironmentInterface $environment)
+    public static function setEnvironment(ProviderInterface $environment)
     {
         static::$environment = $environment;
     }
@@ -152,13 +155,13 @@ class Env
     /**
      * Get the instance to use for environment variables.
      *
-     * @return EnvironmentInterface
+     * @return ProviderInterface
      */
     public static function getEnvironment()
     {
         if (!static::$environment) {
             $path = static::path("data/env.yaml");
-            static::setEnvironment(new YamlEnvironment($path));
+            static::setEnvironment(new YamlProvider($path));
         }
 
         return static::$environment;

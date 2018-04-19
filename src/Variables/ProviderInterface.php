@@ -1,8 +1,8 @@
 <?php
 
-namespace duncan3dc\Env;
+namespace duncan3dc\Env\Variables;
 
-interface EnvironmentInterface
+interface ProviderInterface
 {
 
     /**
