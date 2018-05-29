@@ -21,6 +21,13 @@ class EnvTest extends TestCase
     }
 
 
+    public function testUsePathEithPathVendorParent()
+    {
+        Env::usePath(Env::PATH_VENDOR_PARENT);
+        $this->assertSame('/home/travis', Env::getPath());
+    }
+
+
     public function testUsePhpSelf()
     {
         $check = pathinfo($_SERVER["PHP_SELF"], \PATHINFO_DIRNAME);
