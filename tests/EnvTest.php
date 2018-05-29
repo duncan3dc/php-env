@@ -21,10 +21,14 @@ class EnvTest extends TestCase
     }
 
 
-    public function testUsePathEithPathVendorParent()
+    public function testUseVendorParent()
     {
+        if (!getenv("TRAVIS")) {
+            $this->markTestSkipped("Test can only be run when the location of source code is known");
+        }
+
         Env::usePath(Env::PATH_VENDOR_PARENT);
-        $this->assertSame('/home/travis', Env::getPath());
+        $this->assertSame("/home/travis", Env::getPath());
     }
 
 
