@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 1.1.0 - 2018-06-26
+
+### Added
+
+* [Providers] Added a simple array provider.
+
+--------
+
 ## 1.0.0 - 2018-05-03
 
 ### Added
