@@ -3,6 +3,7 @@
 namespace duncan3dc\Env;
 
 use function is_dir;
+use function is_string;
 use function realpath;
 use function rtrim;
 use function strlen;
@@ -58,7 +59,7 @@ final class Path implements PathInterface
         $realroot = realpath($path);
 
         # Ensure the path is actually a directory
-        if (!is_dir($realroot)) {
+        if ($realroot === false || !is_dir($realroot)) {
             throw new Exception("Invalid path specified: {$path}");
         }
 
@@ -91,7 +92,13 @@ final class Path implements PathInterface
     public function realpath(string $append): string
     {
         $path = $this->path($append);
-        return realpath($path);
+
+        $realpath = realpath($path);
+        if ($realpath === false) {
+            throw new Exception("Invalid path specified: {$path}");
+        }
+
+        return $realpath;
     }
 
 

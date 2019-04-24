@@ -10,7 +10,7 @@ use duncan3dc\Env\PathInterface;
 use duncan3dc\Env\Variables\GlobalProvider;
 use duncan3dc\Env\Variables\ProviderInterface;
 use Mockery;
-use Mockery\Mock;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use function file_put_contents;
 use function is_dir;
@@ -22,10 +22,10 @@ class EnvironmentTest extends TestCase
     /** @var Environment $environment The instance we are testing */
     private $environment;
 
-    /** @var ProviderInterface|Mock $provider A provide instance to test with */
+    /** @var ProviderInterface&MockInterface $provider A provide instance to test with */
     private $provider;
 
-    /** @var PathInterface $path A path instance to test with */
+    /** @var PathInterface&MockInterface $path A path instance to test with */
     private $path;
 
 
@@ -100,8 +100,8 @@ class EnvironmentTest extends TestCase
     public function testSet1()
     {
         $this->provider->shouldReceive("set")->once()->with("talk", "walk")->andReturn("dsgldujhfus");
-        $result = $this->environment->set("talk", "walk");
-        $this->assertSame(null, $result);
+        $this->environment->set("talk", "walk");
+        $this->assertTrue(true);
     }
 
 

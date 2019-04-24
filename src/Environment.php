@@ -153,10 +153,10 @@ final class Environment implements EnvironmentInterface
                 $head = "{$path}/HEAD";
                 if (file_exists($head)) {
                     $data = file_get_contents($head);
-                    if (preg_match("/ref: ([^\s]+)\b/", $data, $matches)) {
+                    if (preg_match("/ref: ([^\s]+)\b/", (string) $data, $matches)) {
                         $ref = $path . "/" . $matches[1];
                         if (file_exists($ref)) {
-                            $revision = trim(file_get_contents($ref));
+                            $revision = trim((string) file_get_contents($ref));
                         }
                     }
                 }

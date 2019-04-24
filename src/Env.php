@@ -4,6 +4,7 @@ namespace duncan3dc\Env;
 
 use duncan3dc\Env\Variables\ProviderInterface;
 use duncan3dc\Env\Variables\YamlProvider;
+use function realpath;
 
 final class Env
 {
@@ -28,7 +29,7 @@ final class Env
     private static $path;
 
     /**
-     * @var ProviderInterface $environment The underlying environment instance in use.
+     * @var ProviderInterface|null $environment The underlying environment instance in use.
      */
     private static $environment;
 
@@ -83,7 +84,7 @@ final class Env
         $path = realpath($argument);
 
         # Ensure the path is actually a diectory
-        if (!is_dir($path)) {
+        if ($path === false || !is_dir($path)) {
             throw new Exception("Invalid path specified: {$argument}");
         }
 
@@ -163,9 +164,9 @@ final class Env
      */
     public static function getEnvironment(): ProviderInterface
     {
-        if (!self::$environment) {
+        if (self::$environment === null) {
             $path = self::path("data/env.yaml");
-            self::setEnvironment(new YamlProvider($path));
+            self::$environment = new YamlProvider($path);
         }
 
         return self::$environment;
@@ -239,7 +240,13 @@ final class Env
     public static function realpath(string $append): string
     {
         $path = self::path($append);
-        return realpath($path);
+
+        $realpath = realpath($path);
+        if ($realpath === false) {
+            throw new Exception("Invalid path specified: {$path}");
+        }
+
+        return $realpath;
     }
 
 
@@ -298,10 +305,10 @@ final class Env
                 $head = "{$path}/HEAD";
                 if (file_exists($head)) {
                     $data = file_get_contents($head);
-                    if (preg_match("/ref: ([^\s]+)\b/", $data, $matches)) {
+                    if (preg_match("/ref: ([^\s]+)\b/", (string) $data, $matches)) {
                         $ref = $path . "/" . $matches[1];
                         if (file_exists($ref)) {
-                            $revision = trim(file_get_contents($ref));
+                            $revision = trim((string) file_get_contents($ref));
                         }
                     }
                 }
