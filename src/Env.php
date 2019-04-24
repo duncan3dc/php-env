@@ -87,7 +87,7 @@ final class Env
             throw new Exception("Invalid path specified: {$argument}");
         }
 
-        static::$path = $path;
+        self::$path = $path;
     }
 
 
@@ -99,15 +99,15 @@ final class Env
      */
     public static function getPath(): string
     {
-        if (!static::$path) {
-            static::usePath(self::PATH_VENDOR_PARENT);
+        if (!self::$path) {
+            self::usePath(self::PATH_VENDOR_PARENT);
         }
 
-        if (!static::$path) {
+        if (!self::$path) {
             throw new Exception("Failed to establish the current environment path");
         }
 
-        return static::$path;
+        return self::$path;
     }
 
 
@@ -122,14 +122,14 @@ final class Env
      */
     public static function path(string $append, $use = null): string
     {
-        $path = static::getPath();
+        $path = self::getPath();
 
         # If a different use has been requested then use it for this call only
         if ($use) {
             $previous = $path;
-            static::usePath($use);
-            $path = static::getPath();
-            static::usePath($previous);
+            self::usePath($use);
+            $path = self::getPath();
+            self::usePath($previous);
         }
 
         if (substr($append, 0, 1) != "/") {
@@ -151,7 +151,7 @@ final class Env
      */
     public static function setEnvironment(ProviderInterface $environment): void
     {
-        static::$environment = $environment;
+        self::$environment = $environment;
     }
 
 
@@ -163,12 +163,12 @@ final class Env
      */
     public static function getEnvironment(): ProviderInterface
     {
-        if (!static::$environment) {
-            $path = static::path("data/env.yaml");
-            static::setEnvironment(new YamlProvider($path));
+        if (!self::$environment) {
+            $path = self::path("data/env.yaml");
+            self::setEnvironment(new YamlProvider($path));
         }
 
-        return static::$environment;
+        return self::$environment;
     }
 
 
@@ -182,7 +182,7 @@ final class Env
      */
     public static function getVar(string $var)
     {
-        $environment = static::getEnvironment();
+        $environment = self::getEnvironment();
 
         if (!$environment->has($var)) {
             return null;
@@ -202,7 +202,7 @@ final class Env
      */
     public static function requireVar(string $var)
     {
-        $environment = static::getEnvironment();
+        $environment = self::getEnvironment();
 
         if (!$environment->has($var)) {
             throw new Exception("Failed to get the environment variable: {$var}");
@@ -223,7 +223,7 @@ final class Env
      */
     public static function setVar(string $var, $value): void
     {
-        static::getEnvironment()->set($var, $value);
+        self::getEnvironment()->set($var, $value);
     }
 
 
@@ -238,7 +238,7 @@ final class Env
      */
     public static function realpath(string $append): string
     {
-        $path = static::path($append);
+        $path = self::path($append);
         return realpath($path);
     }
 
@@ -250,18 +250,18 @@ final class Env
      */
     public static function getHostName(): string
     {
-        if (static::$hostname === null) {
+        if (self::$hostname === null) {
             # If the hostname is in the server array (usually set by apache) then use that
             if (!empty($_SERVER["HTTP_HOST"])) {
-                static::$hostname = $_SERVER["HTTP_HOST"];
+                self::$hostname = $_SERVER["HTTP_HOST"];
 
             # Otherwise use the hostname of this machine
             } else {
-                static::$hostname = static::getMachineName();
+                self::$hostname = self::getMachineName();
             }
         }
 
-        return static::$hostname;
+        return self::$hostname;
     }
 
 
@@ -272,11 +272,11 @@ final class Env
      */
     public static function getMachineName(): string
     {
-        if (static::$machine === null) {
-            static::$machine = php_uname("n");
+        if (self::$machine === null) {
+            self::$machine = php_uname("n");
         }
 
-        return static::$machine;
+        return self::$machine;
     }
 
 
@@ -290,10 +290,10 @@ final class Env
      */
     public static function getRevision(int $length = 10): string
     {
-        if (static::$revision === null) {
+        if (self::$revision === null) {
             $revision = "";
 
-            $path = static::path(".git");
+            $path = self::path(".git");
             if (is_dir($path)) {
                 $head = "{$path}/HEAD";
                 if (file_exists($head)) {
@@ -307,13 +307,13 @@ final class Env
                 }
             }
 
-            static::$revision = $revision;
+            self::$revision = $revision;
         }
 
-        if ($length > 0 && strlen(static::$revision) > $length) {
-            return substr(static::$revision, 0, $length);
+        if ($length > 0 && strlen(self::$revision) > $length) {
+            return substr(self::$revision, 0, $length);
         } else {
-            return static::$revision;
+            return self::$revision;
         }
     }
 
