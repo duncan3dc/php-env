@@ -20,7 +20,6 @@ install:
 
 script:
   - vendor/bin/phpunit
-  - tests/lint.sh
   - vendor/bin/composer-require-checker
 
 jobs:
