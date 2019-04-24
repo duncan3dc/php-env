@@ -19,7 +19,7 @@ interface EnvironmentInterface
      *
      * @param string $key The name of the variable to retrieve
      *
-     * @return mixed
+     * @return string|int|bool
      */
     public function get(string $key);
 
@@ -29,7 +29,8 @@ interface EnvironmentInterface
      *
      * @param string $key The name of the variable to retrieve
      *
-     * @return mixed
+     * @return string|int|bool
+     * @throws Exception
      */
     public function require(string $key);
 
@@ -38,17 +39,17 @@ interface EnvironmentInterface
      * Override an environment variable.
      *
      * @param string $key The name of the variable to set
-     * @param string|int|boolean $value The value of the environment variable
+     * @param string|int|bool $value The value of the environment variable
      *
      * @return void
      */
-    public function set(string $key, $value);
+    public function set(string $key, $value): void;
 
 
     /**
      * Get an absolute path for the specified relative path (relative to the currently used internal root path).
      *
-     * @param string $apend The relative path to append to the root path
+     * @param string $append The relative path to append to the root path
      *
      * @return string
      */

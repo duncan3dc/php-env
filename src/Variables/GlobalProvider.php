@@ -9,7 +9,7 @@ class GlobalProvider extends AbstractProvider
      *
      * @return array
      */
-    protected function getVars()
+    protected function getVars(): array
     {
         return $_ENV;
     }

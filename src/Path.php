@@ -17,9 +17,10 @@ class Path implements PathInterface
 
 
     /**
-     * Get an intsance for the apache document root.
+     * Get an instance for the apache document root.
      *
      * @return PathInterface
+     * @throws Exception
      */
     public static function webroot(): PathInterface
     {
@@ -34,6 +35,9 @@ class Path implements PathInterface
 
     /**
      * Get an instance for the parent of the vendor directory (commonly the project root)
+     *
+     * @return PathInterface
+     * @throws Exception
      */
     public static function root(): PathInterface
     {
@@ -46,7 +50,7 @@ class Path implements PathInterface
      *
      * @param string $path The local filesystem path to represent
      *
-     * @return void
+     * @throws Exception
      */
     public function __construct(string $path)
     {

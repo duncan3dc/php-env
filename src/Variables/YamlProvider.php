@@ -17,7 +17,7 @@ class YamlProvider extends AbstractProvider
      *
      * @param string $path The location of the file
      */
-    public function __construct($path)
+    public function __construct(string $path)
     {
         $this->path = $path;
     }
@@ -28,7 +28,7 @@ class YamlProvider extends AbstractProvider
      *
      * @return array
      */
-    protected function getVars()
+    protected function getVars(): array
     {
         return Yaml::decodeFromFile($this->path)->asArray();
     }

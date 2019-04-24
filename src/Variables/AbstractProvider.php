@@ -11,11 +11,11 @@ abstract class AbstractProvider implements ProviderInterface
 
 
     /**
-     * Get all defined environment variables.
+     * Ensure all the environment variables are loaded.
      *
-     * @return null
+     * @return void
      */
-    private function loadVars()
+    private function loadVars(): void
     {
         if ($this->vars !== null) {
             return;
@@ -26,8 +26,6 @@ abstract class AbstractProvider implements ProviderInterface
         } catch (\Exception $e) {
             $this->vars = [];
         }
-
-        return $this->vars;
     }
 
 
@@ -36,17 +34,13 @@ abstract class AbstractProvider implements ProviderInterface
      *
      * @return array
      */
-    abstract protected function getVars();
+    abstract protected function getVars(): array;
 
 
     /**
-     * Check if a specific environment variable exists.
-     *
-     * @param string $var The name of the variable to check
-     *
-     * @return bool
+     * @inheritdoc
      */
-    public function has($var)
+    public function has(string $var): bool
     {
         $this->loadVars();
         return array_key_exists($var, $this->vars);
@@ -54,13 +48,9 @@ abstract class AbstractProvider implements ProviderInterface
 
 
     /**
-     * Get a specific environment variable.
-     *
-     * @param string $var The name of the variable to retrieve
-     *
-     * @return mixed
+     * @inheritdoc
      */
-    public function get($var)
+    public function get(string $var)
     {
         $this->loadVars();
         return $this->vars[$var];
@@ -68,17 +58,11 @@ abstract class AbstractProvider implements ProviderInterface
 
 
     /**
-     * Override an environment variable.
-     *
-     * @param string $var The name of the variable to set
-     * @param string|int|boolean $value The value of the environment variable
-     *
-     * @return $this
+     * @inheritdoc
      */
-    public function set($var, $value)
+    public function set(string $var, $value): void
     {
         $this->loadVars();
         $this->vars[$var] = $value;
-        return $this;
     }
 }

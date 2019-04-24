@@ -28,7 +28,9 @@ class Environment implements EnvironmentInterface
     /**
      * Create a new instance.
      *
+     * @param ProviderInterface $provider
      * @param PathInterface $root The root path to use for any path calculations
+     * @throws Exception
      */
     public function __construct(ProviderInterface $provider, PathInterface $root = null)
     {
@@ -79,7 +81,7 @@ class Environment implements EnvironmentInterface
     /**
      * @inheritDoc
      */
-    public function set(string $key, $value)
+    public function set(string $key, $value): void
     {
         $this->provider->set($key, $value);
     }

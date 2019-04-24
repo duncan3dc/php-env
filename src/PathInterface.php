@@ -7,7 +7,7 @@ interface PathInterface
     /**
      * Get an absolute path for the specified relative path (relative to the currently used internal root path).
      *
-     * @param string $apend The relative path to append to the root path
+     * @param string $append The relative path to append to the root path
      *
      * @return string
      */

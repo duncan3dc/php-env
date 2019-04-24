@@ -12,7 +12,7 @@ interface ProviderInterface
      *
      * @return bool
      */
-    public function has($var);
+    public function has(string $var): bool;
 
 
     /**
@@ -20,18 +20,18 @@ interface ProviderInterface
      *
      * @param string $var The name of the variable to retrieve
      *
-     * @return mixed
+     * @return string|int|bool
      */
-    public function get($var);
+    public function get(string $var);
 
 
     /**
      * Override an environment variable.
      *
      * @param string $var The name of the variable to set
-     * @param string|int|boolean $value The value of the environment variable
+     * @param string|int|bool $value The value of the environment variable
      *
      * @return void
      */
-    public function set($var, $value);
+    public function set(string $var, $value): void;
 }

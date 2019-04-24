@@ -54,8 +54,9 @@ class Env
      * @param int|string $argument Either one of the PATH class constants or an actual path to a directory that exists, and is readable
      *
      * @return void
+     * @throws Exception
      */
-    public static function usePath($argument)
+    public static function usePath($argument): void
     {
         # Use the document root normally set via apache
         if ($argument === self::PATH_DOCUMENT_ROOT) {
@@ -91,11 +92,12 @@ class Env
 
 
     /**
-     * Get the root path, by default this is the parent directory of the composer vender directory.
+     * Get the root path, by default this is the parent directory of the composer vendor directory.
      *
      * @return string
+     * @throws Exception
      */
-    public static function getPath()
+    public static function getPath(): string
     {
         if (!static::$path) {
             static::usePath(self::PATH_VENDOR_PARENT);
@@ -112,12 +114,13 @@ class Env
     /**
      * Get an absolute path for the specified relative path (relative to the currently used internal root path).
      *
-     * @param string $apend The relative path to append to the root path
-     * @param int|string $use Either one of the PATH class constants or an actual path to a directory that exists, and is readable
+     * @param string $append The relative path to append to the root path
+     * @param int|string|null $use Either one of the PATH class constants or an actual path to a directory that exists, and is readable
      *
      * @return string
+     * @throws Exception
      */
-    public static function path($append, $use = null)
+    public static function path(string $append, $use = null): string
     {
         $path = static::getPath();
 
@@ -146,7 +149,7 @@ class Env
      *
      * @return void
      */
-    public static function setEnvironment(ProviderInterface $environment)
+    public static function setEnvironment(ProviderInterface $environment): void
     {
         static::$environment = $environment;
     }
@@ -156,8 +159,9 @@ class Env
      * Get the instance to use for environment variables.
      *
      * @return ProviderInterface
+     * @throws Exception
      */
-    public static function getEnvironment()
+    public static function getEnvironment(): ProviderInterface
     {
         if (!static::$environment) {
             $path = static::path("data/env.yaml");
@@ -173,9 +177,10 @@ class Env
      *
      * @param string $var The name of the variable to retrieve
      *
-     * @return mixed
+     * @return string|int|bool
+     * @throws Exception
      */
-    public static function getVar($var)
+    public static function getVar(string $var)
     {
         $environment = static::getEnvironment();
 
@@ -192,9 +197,10 @@ class Env
      *
      * @param string $var The name of the variable to retrieve
      *
-     * @return mixed
+     * @return string|int|bool
+     * @throws Exception
      */
-    public static function requireVar($var)
+    public static function requireVar(string $var)
     {
         $environment = static::getEnvironment();
 
@@ -210,11 +216,12 @@ class Env
      * Override an environment variable.
      *
      * @param string $var The name of the variable to set
-     * @param string|int|boolean $value The value of the environment variable
+     * @param string|int|bool $value The value of the environment variable
      *
      * @return void
+     * @throws Exception
      */
-    public static function setVar($var, $value)
+    public static function setVar(string $var, $value): void
     {
         static::getEnvironment()->set($var, $value);
     }
@@ -227,8 +234,9 @@ class Env
      * @param string $append The relative path to append to the root path
      *
      * @return string
+     * @throws Exception
      */
-    public static function realpath($append)
+    public static function realpath(string $append): string
     {
         $path = static::path($append);
         return realpath($path);
@@ -240,7 +248,7 @@ class Env
      *
      * @return string
      */
-    public static function getHostName()
+    public static function getHostName(): string
     {
         if (static::$hostname === null) {
             # If the hostname is in the server array (usually set by apache) then use that
@@ -262,7 +270,7 @@ class Env
      *
      * @return string
      */
-    public static function getMachineName()
+    public static function getMachineName(): string
     {
         if (static::$machine === null) {
             static::$machine = php_uname("n");
@@ -277,9 +285,10 @@ class Env
      *
      * @param int $length The length of the revision hash to return
      *
-     * @return string|void
+     * @return string
+     * @throws Exception
      */
-    public static function getRevision($length = 10)
+    public static function getRevision(int $length = 10): string
     {
         if (static::$revision === null) {
             $revision = "";
@@ -314,7 +323,7 @@ class Env
      *
      * @return string
      */
-    public static function getUserAgent()
+    public static function getUserAgent(): string
     {
         if (empty($_SERVER["USER_AGENT"])) {
             return "";

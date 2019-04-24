@@ -25,7 +25,7 @@ final class ArrayProvider extends AbstractProvider
      *
      * @return array
      */
-    protected function getVars()
+    protected function getVars(): array
     {
         return $this->data;
     }
