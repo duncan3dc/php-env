@@ -29,7 +29,7 @@ class EnvironmentTest extends TestCase
     private $path;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->provider = Mockery::mock(ProviderInterface::class);
         $this->path = Mockery::mock(PathInterface::class);
@@ -37,7 +37,7 @@ class EnvironmentTest extends TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }

@@ -10,7 +10,7 @@ class GlobalProviderTest extends TestCase
 {
     private $env;
 
-    public function setUp()
+    public function setUp(): void
     {
         $_ENV["test-string"] = "OK";
         $_ENV["test-int"] = 7;

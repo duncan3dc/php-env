@@ -12,7 +12,7 @@ class ArrayProviderTest extends TestCase
      */
     private $env;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->env = new ArrayProvider([
             "test-string" => "here",
