@@ -12,7 +12,7 @@ use function strlen;
 use function substr;
 use function trim;
 
-class Environment implements EnvironmentInterface
+final class Environment implements EnvironmentInterface
 {
     /**
      * @var ProviderInterface $provider The environment variable provider.

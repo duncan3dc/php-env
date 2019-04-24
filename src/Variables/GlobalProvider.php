@@ -2,7 +2,7 @@
 
 namespace duncan3dc\Env\Variables;
 
-class GlobalProvider extends AbstractProvider
+final class GlobalProvider extends AbstractProvider
 {
     /**
      * Get all defined environment variables.

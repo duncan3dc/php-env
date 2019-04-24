@@ -5,7 +5,7 @@ namespace duncan3dc\Env;
 use duncan3dc\Env\Variables\ProviderInterface;
 use duncan3dc\Env\Variables\YamlProvider;
 
-class Env
+final class Env
 {
     /**
      * For use with usePath() - Represents the apache document root

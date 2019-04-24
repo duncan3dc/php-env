@@ -8,7 +8,7 @@ use function rtrim;
 use function strlen;
 use function substr;
 
-class Path implements PathInterface
+final class Path implements PathInterface
 {
     /**
      * @var string $path The root path to use.

@@ -4,7 +4,7 @@ namespace duncan3dc\Env\Variables;
 
 use duncan3dc\Serial\Json;
 
-class JsonProvider extends AbstractProvider
+final class JsonProvider extends AbstractProvider
 {
     /**
      * @var string $path The path to the file.
