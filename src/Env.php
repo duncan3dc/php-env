@@ -178,7 +178,7 @@ final class Env
      *
      * @param string $var The name of the variable to retrieve
      *
-     * @return string|int|bool
+     * @return string|int|bool|null
      * @throws Exception
      */
     public static function getVar(string $var)
@@ -198,7 +198,7 @@ final class Env
      *
      * @param string $var The name of the variable to retrieve
      *
-     * @return string|int|bool
+     * @return string|int|bool|null
      * @throws Exception
      */
     public static function requireVar(string $var)
@@ -217,7 +217,7 @@ final class Env
      * Override an environment variable.
      *
      * @param string $var The name of the variable to set
-     * @param string|int|bool $value The value of the environment variable
+     * @param string|int|bool|null $value The value of the environment variable
      *
      * @return void
      * @throws Exception

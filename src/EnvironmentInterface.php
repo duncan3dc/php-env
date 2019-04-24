@@ -19,7 +19,7 @@ interface EnvironmentInterface
      *
      * @param string $key The name of the variable to retrieve
      *
-     * @return string|int|bool
+     * @return string|int|bool|null
      */
     public function get(string $key);
 
@@ -29,7 +29,7 @@ interface EnvironmentInterface
      *
      * @param string $key The name of the variable to retrieve
      *
-     * @return string|int|bool
+     * @return string|int|bool|null
      * @throws Exception
      */
     public function require(string $key);
@@ -39,7 +39,7 @@ interface EnvironmentInterface
      * Override an environment variable.
      *
      * @param string $key The name of the variable to set
-     * @param string|int|bool $value The value of the environment variable
+     * @param string|int|bool|null $value The value of the environment variable
      *
      * @return void
      */
