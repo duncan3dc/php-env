@@ -123,7 +123,7 @@ class EnvironmentTest extends TestCase
 
     private function getGlobalEnvironment(): EnvironmentInterface
     {
-        return new Environment(new GlobalProvider, $this->path);
+        return new Environment(new GlobalProvider(), $this->path);
     }
 
 
@@ -162,7 +162,7 @@ class EnvironmentTest extends TestCase
 
     private function withRevision(): EnvironmentInterface
     {
-        $environment = new Environment(new GlobalProvider, new Path(__DIR__ . "/data"));
+        $environment = new Environment(new GlobalProvider(), new Path(__DIR__ . "/data"));
         $path = $environment->path(".git");
         if (!is_dir($path)) {
             mkdir($path);

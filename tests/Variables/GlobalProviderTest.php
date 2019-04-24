@@ -16,7 +16,7 @@ class GlobalProviderTest extends TestCase
         $_ENV["test-int"] = 7;
         $_ENV["test-bool"] = true;
         $_ENV["test-exists"] = null;
-        $this->env = new GlobalProvider;
+        $this->env = new GlobalProvider();
     }
 
 
