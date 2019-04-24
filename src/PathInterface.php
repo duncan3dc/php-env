@@ -24,6 +24,7 @@ interface PathInterface
      */
     public function realpath(string $append): string;
 
+
     /**
      * Convert the path to a string.
      *
