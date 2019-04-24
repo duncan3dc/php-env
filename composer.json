@@ -29,5 +29,15 @@
     },
     "autoload-dev": {
         "psr-4": {"duncan3dc\\EnvTests\\": "tests/"}
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit",
+            "vendor/bin/phpstan analyse --level=max src",
+            "vendor/bin/phpstan analyse --level=max --configuration=phpstan-tests.neon tests",
+            "vendor/bin/phpcs --standard=phpcs.xml src tests",
+            "vendor/bin/composer-require-checker",
+            "@composer validate --strict"
+        ]
     }
 }
