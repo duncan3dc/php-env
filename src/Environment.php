@@ -111,7 +111,7 @@ final class Environment implements EnvironmentInterface
     public function getHostName(): string
     {
         if ($this->has("hostname")) {
-            return $this->get("hostname");
+            return (string) $this->get("hostname");
         }
 
         # If the hostname is in the server array (usually set by apache) then use that
@@ -123,7 +123,7 @@ final class Environment implements EnvironmentInterface
             $this->set("hostname", $this->getMachineName());
         }
 
-        return $this->get("hostname");
+        return (string) $this->get("hostname");
     }
 
 
@@ -136,7 +136,7 @@ final class Environment implements EnvironmentInterface
             $this->set("machine", php_uname("n"));
         }
 
-        return $this->get("machine");
+        return (string) $this->get("machine");
     }
 
 
@@ -165,7 +165,7 @@ final class Environment implements EnvironmentInterface
             $this->set("revision", $revision);
         }
 
-        $revision = $this->get("revision");
+        $revision = (string) $this->get("revision");
 
         if ($length > 0 && strlen($revision) > $length) {
             $revision = substr($revision, 0, $length);
@@ -184,6 +184,6 @@ final class Environment implements EnvironmentInterface
             $this->set("user-agent", $_SERVER["USER_AGENT"] ?? "");
         }
 
-        return $this->get("user-agent");
+        return (string) $this->get("user-agent");
     }
 }
