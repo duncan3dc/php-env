@@ -2,8 +2,10 @@
 
 namespace duncan3dc\Env;
 
+use duncan3dc\Env\Variables\GlobalProvider;
 use duncan3dc\Env\Variables\ProviderInterface;
 use duncan3dc\Env\Variables\YamlProvider;
+use function file_exists;
 use function realpath;
 
 final class Env
@@ -166,7 +168,11 @@ final class Env
     {
         if (self::$environment === null) {
             $path = self::path("data/env.yaml");
-            self::$environment = new YamlProvider($path);
+            if (file_exists($path)) {
+                self::$environment = new YamlProvider($path);
+            } else {
+                self::$environment = new GlobalProvider();
+            }
         }
 
         return self::$environment;

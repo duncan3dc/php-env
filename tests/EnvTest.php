@@ -78,6 +78,33 @@ class EnvTest extends TestCase
         $this->assertSame(__DIR__, Env::getPath());
     }
 
+
+    /**
+     * Ensure that we use data/env.yaml by default.
+     */
+    public function testGetEnvironment1(): void
+    {
+        Env::usePath(__DIR__);
+        $environment = Env::getEnvironment();
+
+        $this->assertSame("yaml", $environment->get("file-type"));
+    }
+
+
+    /**
+     * Ensure that we use global environment if data/env.yaml does not exist.
+     */
+    public function testGetEnvironment2(): void
+    {
+        $_ENV["file-type"] = "global";
+
+        Env::usePath(__DIR__ . "/data");
+        $environment = Env::getEnvironment();
+
+        $this->assertSame("global", $environment->get("file-type"));
+    }
+
+
     public function testPath1()
     {
         $this->assertSame(__DIR__ . "/", Env::path(""));

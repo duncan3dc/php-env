@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 1.2.0 - 2019-07-31
+
+### Fixed
+
+* [Env] Default to the global environment if no data/env.yaml file exists.
+
+--------
+
 ## 1.1.0 - 2018-06-26
 
 ### Added
