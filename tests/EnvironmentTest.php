@@ -12,6 +12,7 @@ use duncan3dc\Env\Variables\ProviderInterface;
 use Mockery;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+
 use function file_put_contents;
 use function is_dir;
 use function mkdir;

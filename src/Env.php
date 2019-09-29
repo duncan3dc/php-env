@@ -5,6 +5,7 @@ namespace duncan3dc\Env;
 use duncan3dc\Env\Variables\GlobalProvider;
 use duncan3dc\Env\Variables\ProviderInterface;
 use duncan3dc\Env\Variables\YamlProvider;
+
 use function file_exists;
 use function realpath;
 
@@ -13,17 +14,17 @@ final class Env
     /**
      * For use with usePath() - Represents the apache document root
      */
-    const PATH_DOCUMENT_ROOT = 701;
+    public const PATH_DOCUMENT_ROOT = 701;
 
     /**
      * For use with usePath() - Represents the directory that the PHP_SELF filename is in
      */
-    const PATH_PHP_SELF = 702;
+    public const PATH_PHP_SELF = 702;
 
     /**
      * For use with usePath() - Represents the parent of the vendor directory (commonly the project root)
      */
-    const PATH_VENDOR_PARENT = 703;
+    public const PATH_VENDOR_PARENT = 703;
 
     /**
      * @var string $path The root path to use.
