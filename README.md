@@ -2,7 +2,7 @@
 A small PHP library to get environment details
 
 [![release](https://poser.pugx.org/duncan3dc/php-env/version.svg)](https://packagist.org/packages/duncan3dc/php-env)
-[![build](https://travis-ci.org/duncan3dc/php-env.svg?branch=master)](https://travis-ci.org/duncan3dc/php-env)
+[![build](https://github.com/duncan3dc/php-env/workflows/buildcheck/badge.svg?branch=master)](https://github.com/duncan3dc/php-env/actions?query=branch%3Amaster+workflow%3Abuildcheck)
 [![coverage](https://codecov.io/gh/duncan3dc/php-env/graph/badge.svg)](https://codecov.io/gh/duncan3dc/php-env)
 
 _Read more at http://duncan3dc.github.io/php-env/_  
