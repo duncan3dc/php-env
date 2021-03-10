@@ -10,7 +10,7 @@ class JsonProviderTest extends TestCase
 {
     private $env;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->env = new JsonProvider(__DIR__ . "/../data/env.json");
     }

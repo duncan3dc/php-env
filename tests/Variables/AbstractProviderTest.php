@@ -9,7 +9,7 @@ class AbstractProviderTest extends TestCase
 {
     private $env;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->env = new ExceptionProvider();
     }
