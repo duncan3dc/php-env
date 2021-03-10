@@ -10,7 +10,7 @@ class YamlProviderTest extends TestCase
 {
     private $env;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->env = new YamlProvider(__DIR__ . "/../data/env.yaml");
     }

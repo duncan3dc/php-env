@@ -12,7 +12,7 @@ class PathTest extends TestCase
     private $path;
 
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->path = new Path("/tmp");
     }
