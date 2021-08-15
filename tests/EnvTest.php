@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class EnvTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         # Clear the cached values from previous tests
         $class = new \ReflectionClass(Env::class);
