@@ -44,7 +44,7 @@ class EnvironmentTest extends TestCase
     }
 
 
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $environment = new Environment($this->provider);
         $expected = Path::root()->path("extra");
@@ -53,13 +53,13 @@ class EnvironmentTest extends TestCase
     }
 
 
-    public function testHas1()
+    public function testHas1(): void
     {
         $this->provider->shouldReceive("has")->once()->with("elephant")->andReturn(true);
         $result = $this->environment->has("elephant");
         $this->assertSame(true, $result);
     }
-    public function testHas2()
+    public function testHas2(): void
     {
         $this->provider->shouldReceive("has")->once()->with("disillusioned")->andReturn(false);
         $result = $this->environment->has("disillusioned");
@@ -67,14 +67,14 @@ class EnvironmentTest extends TestCase
     }
 
 
-    public function testGet1()
+    public function testGet1(): void
     {
         $this->provider->shouldReceive("has")->once()->with("contrarian")->andReturn(true);
         $this->provider->shouldReceive("get")->once()->with("contrarian")->andReturn("03");
         $result = $this->environment->get("contrarian");
         $this->assertSame("03", $result);
     }
-    public function testGet2()
+    public function testGet2(): void
     {
         $this->provider->shouldReceive("has")->once()->with("doomed")->andReturn(false);
         $result = $this->environment->get("doomed");
@@ -82,14 +82,14 @@ class EnvironmentTest extends TestCase
     }
 
 
-    public function testRequire1()
+    public function testRequire1(): void
     {
         $this->provider->shouldReceive("has")->once()->with("so-long-fish")->andReturn(true);
         $this->provider->shouldReceive("get")->once()->with("so-long-fish")->andReturn("05");
         $result = $this->environment->require("so-long-fish");
         $this->assertSame("05", $result);
     }
-    public function testRequire2()
+    public function testRequire2(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage("Failed to get the environment variable: so-long-fish");
@@ -98,7 +98,7 @@ class EnvironmentTest extends TestCase
     }
 
 
-    public function testSet1()
+    public function testSet1(): void
     {
         $this->provider->shouldReceive("set")->once()->with("talk", "walk")->andReturn("dsgldujhfus");
         $this->environment->set("talk", "walk");
@@ -106,7 +106,7 @@ class EnvironmentTest extends TestCase
     }
 
 
-    public function testPath1()
+    public function testPath1(): void
     {
         $this->path->shouldReceive("path")->once()->with("by/down")->andReturn("the/river");
         $result = $this->environment->path("by/down");
@@ -114,7 +114,7 @@ class EnvironmentTest extends TestCase
     }
 
 
-    public function testRealpath1()
+    public function testRealpath1(): void
     {
         $this->path->shouldReceive("realpath")->once()->with("delicious")->andReturn("DLB");
         $result = $this->environment->realpath("delicious");
@@ -128,19 +128,19 @@ class EnvironmentTest extends TestCase
     }
 
 
-    public function testGetHostNameApache()
+    public function testGetHostNameApache(): void
     {
         $environment = $this->getGlobalEnvironment();
         $_SERVER["HTTP_HOST"] = "example.com";
         $this->assertSame("example.com", $environment->getHostName());
     }
-    public function testGetHostNameDefault()
+    public function testGetHostNameDefault(): void
     {
         $environment = $this->getGlobalEnvironment();
         unset($_SERVER["HTTP_HOST"]);
         $this->assertSame(php_uname("n"), $environment->getHostName());
     }
-    public function testGetHostNameCache()
+    public function testGetHostNameCache(): void
     {
         $environment = $this->getGlobalEnvironment();
         $environment->set("hostname", "hourglass");
@@ -148,12 +148,12 @@ class EnvironmentTest extends TestCase
     }
 
 
-    public function testGetMachineName1()
+    public function testGetMachineName1(): void
     {
         $environment = $this->getGlobalEnvironment();
         $this->assertSame(php_uname("n"), $environment->getMachineName());
     }
-    public function testGetMachineName2()
+    public function testGetMachineName2(): void
     {
         $environment = $this->getGlobalEnvironment();
         $environment->set("machine", "feathers");
@@ -172,36 +172,36 @@ class EnvironmentTest extends TestCase
         file_put_contents("{$path}/master", "abcdefghijk");
         return $environment;
     }
-    public function testRevision1()
+    public function testRevision1(): void
     {
         $environment = $this->withRevision();
         $this->assertSame("abcdefghij", $environment->getRevision());
     }
-    public function testRevision2()
+    public function testRevision2(): void
     {
         $environment = $this->withRevision();
         $this->assertSame("abcdefghijk", $environment->getRevision(0));
     }
-    public function testRevision3()
+    public function testRevision3(): void
     {
         $environment = $this->withRevision();
         $this->assertSame("abcde", $environment->getRevision(5));
     }
 
 
-    public function testUserAgent()
+    public function testUserAgent(): void
     {
         $environment = $this->getGlobalEnvironment();
         $_SERVER["USER_AGENT"] = "get-the-lead-out";
         $this->assertSame("get-the-lead-out", $environment->getUserAgent());
     }
-    public function testUserAgentFail()
+    public function testUserAgentFail(): void
     {
         $environment = $this->getGlobalEnvironment();
         unset($_SERVER["USER_AGENT"]);
         $this->assertSame("", $environment->getUserAgent());
     }
-    public function testUserAgentCache()
+    public function testUserAgentCache(): void
     {
         $environment = $this->getGlobalEnvironment();
         $_SERVER["USER_AGENT"] = "get-the-lead-out";

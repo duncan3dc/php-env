@@ -5,7 +5,7 @@ namespace duncan3dc\Env\Variables;
 abstract class AbstractProvider implements ProviderInterface
 {
     /**
-     * @var array $vars Internal cache of environment variables.
+     * @var array<string,string|int|bool|null> $vars Internal cache of environment variables.
      */
     private $vars;
 
@@ -32,7 +32,7 @@ abstract class AbstractProvider implements ProviderInterface
     /**
      * Get all defined environment variables.
      *
-     * @return array
+     * @return array<string,string|int|bool|null>
      */
     abstract protected function getVars(): array;
 

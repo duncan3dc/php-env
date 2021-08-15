@@ -23,11 +23,6 @@ final class JsonProvider extends AbstractProvider
     }
 
 
-    /**
-     * Get all defined environment variables.
-     *
-     * @return array
-     */
     protected function getVars(): array
     {
         return Json::decodeFromFile($this->path)->asArray();

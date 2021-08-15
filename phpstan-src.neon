@@ -1,0 +1,4 @@
+parameters:
+	reportUnmatchedIgnoredErrors: false
+	ignoreErrors:
+		- '/^Method duncan3dc\\Env\\Variables\\.*Provider::getVars\(\) should return array<string, bool\|int\|string\|null> but returns array<int\|string, mixed>\.$/'

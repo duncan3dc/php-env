@@ -47,7 +47,7 @@ final class Env
     private static $machine;
 
     /**
-     * @var string $machine The current git version of the codebase running.
+     * @var string $revision The current git version of the codebase running.
      */
     private static $revision;
 

@@ -18,20 +18,20 @@ class PathTest extends TestCase
     }
 
 
-    public function testWebroot1()
+    public function testWebroot1(): void
     {
         $_SERVER["DOCUMENT_ROOT"] = "/tmp/";
         $path = Path::webroot();
         $this->assertSame("/tmp", (string) $path);
     }
-    public function testWebroot2()
+    public function testWebroot2(): void
     {
         unset($_SERVER["DOCUMENT_ROOT"]);
         $this->expectException(Exception::class);
         $this->expectExceptionMessage("DOCUMENT_ROOT not defined");
         Path::webroot();
     }
-    public function testWebroot3()
+    public function testWebroot3(): void
     {
         $_SERVER["DOCUMENT_ROOT"] = "";
         $this->expectException(Exception::class);
@@ -40,7 +40,7 @@ class PathTest extends TestCase
     }
 
 
-    public function testRoot1()
+    public function testRoot1(): void
     {
         $expected = realpath(__DIR__ . "/../../../..");
         $path = Path::root();
@@ -48,13 +48,13 @@ class PathTest extends TestCase
     }
 
 
-    public function testConstructor1()
+    public function testConstructor1(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage("Invalid path specified: /does/not/exist");
         new Path("/does/not/exist");
     }
-    public function testConstructor2()
+    public function testConstructor2(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage("Invalid path specified: " . __FILE__);
@@ -62,35 +62,35 @@ class PathTest extends TestCase
     }
 
 
-    public function testPath1()
+    public function testPath1(): void
     {
         $this->assertSame("/tmp", $this->path->path(""));
     }
-    public function testPath2()
+    public function testPath2(): void
     {
         $this->assertSame("/tmp/test", $this->path->path("test"));
     }
-    public function testPath3()
+    public function testPath3(): void
     {
         $this->assertSame("/tmp/test", $this->path->path("/test/"));
     }
 
 
-    public function testRealpath1()
+    public function testRealpath1(): void
     {
         $this->assertSame("/tmp", $this->path->realpath(""));
     }
-    public function testRealpath2()
+    public function testRealpath2(): void
     {
         $this->assertSame("/tmp", $this->path->realpath("."));
     }
-    public function testRealpath3()
+    public function testRealpath3(): void
     {
         $this->assertSame("/", $this->path->realpath(".."));
     }
 
 
-    public function testToString()
+    public function testToString(): void
     {
         $this->assertSame("/tmp", (string) $this->path);
     }

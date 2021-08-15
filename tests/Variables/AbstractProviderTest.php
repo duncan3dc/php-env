@@ -2,11 +2,11 @@
 
 namespace duncan3dc\EnvTests\Variables;
 
-use duncan3dc\EnvTests\Variables\ExceptionProvider;
 use PHPUnit\Framework\TestCase;
 
 class AbstractProviderTest extends TestCase
 {
+    /** @var ExceptionProvider */
     private $env;
 
     protected function setUp(): void
@@ -15,7 +15,7 @@ class AbstractProviderTest extends TestCase
     }
 
 
-    public function testHas()
+    public function testHas(): void
     {
         $this->assertFalse($this->env->has("test-int"));
     }
