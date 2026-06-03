@@ -30,10 +30,10 @@ final class Environment implements EnvironmentInterface
      * Create a new instance.
      *
      * @param ProviderInterface $provider
-     * @param PathInterface $root The root path to use for any path calculations
+     * @param ?PathInterface $root The root path to use for any path calculations
      * @throws Exception
      */
-    public function __construct(ProviderInterface $provider, PathInterface $root = null)
+    public function __construct(ProviderInterface $provider, ?PathInterface $root = null)
     {
         $this->provider = $provider;
 
