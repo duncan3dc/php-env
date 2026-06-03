@@ -4,7 +4,6 @@ namespace duncan3dc\Env\Variables;
 
 interface ProviderInterface
 {
-
     /**
      * Check if a specific environment variable exists.
      *
